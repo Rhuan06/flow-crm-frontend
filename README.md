@@ -1,36 +1,181 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 FlowCRM — Frontend Web
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss)
+![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
 
-First, run the development server:
+## 📌 Sobre o projeto
+
+O **FlowCRM Frontend** é a interface web de uma aplicação Full Stack de gerenciamento de clientes e oportunidades de vendas.
+
+Desenvolvido com **Next.js (App Router)** e **TypeScript**, o projeto prioriza organização, tipagem estática, componentização e uma experiência de usuário intuitiva.
+
+A aplicação se comunica com uma API RESTful desenvolvida em **Python e FastAPI**, utilizando autenticação baseada em tokens JWT, tratamento de erros e recursos voltados à produtividade de equipes comerciais.
+
+## 🛠️ Tecnologias utilizadas
+
+| Tecnologia | Finalidade |
+|---|---|
+| **Next.js (App Router)** | Framework React para construção da aplicação e gerenciamento de rotas. |
+| **React** | Construção de interfaces por componentes. |
+| **TypeScript** | Tipagem estática e maior segurança no desenvolvimento. |
+| **Tailwind CSS** | Estilização responsiva e padronização visual. |
+| **Context API** | Gerenciamento global de autenticação e notificações. |
+| **Fetch API** | Comunicação HTTP com o backend RESTful. |
+
+## ✨ Funcionalidades
+
+### 🔐 Autenticação e segurança
+
+- Sistema de login integrado à API REST.
+- Autenticação baseada em tokens JWT.
+- Armazenamento do token de acesso no `localStorage`.
+- Tratamento automático de respostas HTTP `401 Unauthorized`, com redirecionamento para a página de login.
+
+### 📊 Dashboard dinâmico
+
+- Visualização de indicadores comerciais.
+- Acompanhamento da quantidade de clientes cadastrados.
+- Monitoramento de oportunidades em aberto.
+- Exibição do valor total das oportunidades.
+
+### 👥 Gestão de clientes
+
+- Listagem da carteira de clientes.
+- Pesquisa por nome ou e-mail.
+- Cadastro e edição por meio de modais.
+- Exclusão com confirmação antes da operação.
+- Exportação de dados para CSV, com compatibilidade com o Excel.
+
+### 📈 Pipeline de vendas (Kanban)
+
+- Organização visual das oportunidades por etapas do funil comercial.
+- Acompanhamento do progresso das negociações.
+- Atualização do status das oportunidades.
+- Visualização dos valores associados às oportunidades.
+
+### 🎨 Experiência do usuário (UX/UI)
+
+- **Skeleton Loaders:** indicadores visuais durante o carregamento dos dados.
+- **Toast Notifications:** notificações flutuantes para operações de sucesso, erro e informação.
+- **ConfirmModal:** modal de confirmação para operações sensíveis.
+- **Error Boundary:** tratamento de erros inesperados por meio da página global `error.tsx`.
+- **Página 404 personalizada:** interface própria para rotas inexistentes (`not-found.tsx`).
+- **Interface responsiva:** adaptação para diferentes tamanhos de tela.
+
+## 🏗️ Arquitetura do projeto
+
+```text
+flowcrm-frontend/
+│
+├── src/
+│   ├── app/
+│   │   ├── dashboard/
+│   │   │   ├── clients/
+│   │   │   ├── opportunities/
+│   │   │   └── page.tsx
+│   │   ├── login/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── error.tsx
+│   │   └── not-found.tsx
+│   │
+│   ├── components/
+│   │   ├── ConfirmModal.tsx
+│   │   ├── Skeleton.tsx
+│   │   └── Toast.tsx
+│   │
+│   ├── contexts/
+│   │   ├── AuthContext.tsx
+│   │   └── ToastContext.tsx
+│   │
+│   ├── services/
+│   │   ├── api.ts
+│   │   ├── clients.ts
+│   │   └── opportunities.ts
+│   │
+│   └── types/
+│       └── index.ts
+│
+├── public/
+├── .env.local
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+## ⚙️ Como executar localmente
+
+### Pré-requisitos
+
+- Node.js 18 ou superior.
+- npm ou yarn.
+- Backend do FlowCRM em execução.
+
+### 1. Clone o repositório
+
+```bash
+git clone <url-do-repositorio-frontend>
+
+cd flowcrm-frontend
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install
+```
+
+### 3. Configure as variáveis de ambiente
+
+Crie um arquivo `.env.local` na raiz do projeto:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+```
+
+**Observação:** certifique-se de que a API FastAPI esteja em execução e acessível pelo endereço configurado.
+
+### 4. Execute a aplicação
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse a aplicação pelo navegador:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Build para produção
 
-## Learn More
+Para gerar a versão otimizada da aplicação:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Após a conclusão do processo, execute:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run start
+```
 
-## Deploy on Vercel
+## 🔗 Backend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+O FlowCRM utiliza uma arquitetura com repositórios separados para frontend e backend.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Frontend:** Next.js, React, TypeScript e Tailwind CSS.
+- **Backend:** Python, FastAPI, SQLAlchemy e PostgreSQL.
+
+**Repositório:** `flowcrm-backend`
+
+## 👨‍💻 Autor
+
+**Rhuan Silva de Oliveira**
+
+Desenvolvedor Full Stack em formação | Análise e Desenvolvimento de Sistemas.
