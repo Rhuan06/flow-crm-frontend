@@ -1,3 +1,4 @@
+
 # 🚀 FlowCRM — Frontend Web
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
@@ -27,12 +28,14 @@ A aplicação se comunica com uma API RESTful desenvolvida em **Python e FastAPI
 
 ## ✨ Funcionalidades
 
-### 🔐 Autenticação e segurança
+### 🔐 Funcionalidades de Autenticação e Conta (SaaS)
 
-- Sistema de login integrado à API REST.
-- Autenticação baseada em tokens JWT.
-- Armazenamento do token de acesso no `localStorage`.
-- Tratamento automático de respostas HTTP `401 Unauthorized`, com redirecionamento para a página de login.
+O frontend conta com um fluxo completo de autoatendimento (*self-service*) integrado à API FastAPI:
+
+- **Cadastro Público (`/register`):** formulário de criação de conta com validação de tamanho mínimo de senha e redirecionamento automático para o login com feedback visual (`?registered=true`).
+- **Login e Sessão (`/login`):** autenticação integrada ao `AuthContext`, tratamento amigável de erros da API e alertas de confirmação de cadastro ou redefinição de senha.
+- **Recuperação e Redefinição de Senha (`/forgot-password` e `/reset-password`):** fluxo completo de solicitação de link por e-mail e definição de nova senha utilizando tokens temporários via query params, com suporte a `Suspense Boundary`.
+- **Dashboard Personalizado:** identificação dinâmica do usuário logado via `/api/v1/auth/me`, com visualização isolada de métricas, clientes, leads e funil de oportunidades.
 
 ### 📊 Dashboard dinâmico
 
@@ -40,6 +43,7 @@ A aplicação se comunica com uma API RESTful desenvolvida em **Python e FastAPI
 - Acompanhamento da quantidade de clientes cadastrados.
 - Monitoramento de oportunidades em aberto.
 - Exibição do valor total das oportunidades.
+- Visualização de métricas associadas ao usuário autenticado.
 
 ### 👥 Gestão de clientes
 
@@ -67,6 +71,8 @@ A aplicação se comunica com uma API RESTful desenvolvida em **Python e FastAPI
 
 ## 🏗️ Arquitetura do projeto
 
+O frontend segue uma estrutura modular, separando páginas, componentes, contextos, serviços e tipos.
+
 ```text
 flowcrm-frontend/
 │
@@ -76,7 +82,19 @@ flowcrm-frontend/
 │   │   │   ├── clients/
 │   │   │   ├── opportunities/
 │   │   │   └── page.tsx
+│   │   │
 │   │   ├── login/
+│   │   │   └── page.tsx
+│   │   │
+│   │   ├── register/
+│   │   │   └── page.tsx
+│   │   │
+│   │   ├── forgot-password/
+│   │   │   └── page.tsx
+│   │   │
+│   │   ├── reset-password/
+│   │   │   └── page.tsx
+│   │   │
 │   │   ├── layout.tsx
 │   │   ├── page.tsx
 │   │   ├── error.tsx
