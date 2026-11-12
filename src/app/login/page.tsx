@@ -10,6 +10,7 @@ import { useAuth } from '@/contexts/AuthContext';
 function LoginForm() {
   const searchParams = useSearchParams();
   const registered = searchParams.get('registered');
+  const reset = searchParams.get('reset');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,6 +61,12 @@ function LoginForm() {
           </div>
         )}
 
+        {reset && (
+          <div className="bg-green-50 border border-green-200 text-green-700 text-sm p-3 rounded-md text-center">
+            Senha redefinida com sucesso! Entre com a sua nova senha.
+          </div>
+        )}
+
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-600 text-sm p-3 rounded-md text-center">
             {error}
@@ -89,12 +96,21 @@ function LoginForm() {
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Palavra-passe
-            </label>
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Senha
+              </label>
+
+              <Link
+                href="/forgot-password"
+                className="text-xs font-medium text-blue-600 hover:text-blue-500 hover:underline"
+              >
+                Esqueceu a senha?
+              </Link>
+            </div>
 
             <input
               id="password"
